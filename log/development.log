@@ -12899,3 +12899,498 @@ Processing by TicketsController#index as HTML
 Completed 200 OK in 30ms (Views: 24.8ms | ActiveRecord: 1.8ms | Allocations: 13956)
 
 
+Started GET "/" for 127.0.0.1 at 2023-06-21 17:11:21 -0400
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#home as HTML
+Completed 401 Unauthorized in 33ms (ActiveRecord: 0.0ms | Allocations: 2509)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2023-06-21 17:11:22 -0400
+Processing by Users::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 8.6ms | Allocations: 735)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 180181.9ms | Allocations: 2024162)
+  Rendered layouts/_messages.html.erb (Duration: 2.2ms | Allocations: 227)
+  Rendered layout layouts/application.html.erb (Duration: 180760.3ms | Allocations: 2030282)
+Completed 200 OK in 181340ms (Views: 180785.5ms | ActiveRecord: 9.1ms | Allocations: 2040638)
+
+
+Started GET "/" for 127.0.0.1 at 2023-06-21 17:18:22 -0400
+  [1m[36mActiveRecord::SchemaMigration Pluck (41.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#home as HTML
+Completed 401 Unauthorized in 28ms (ActiveRecord: 0.0ms | Allocations: 2692)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2023-06-21 17:18:22 -0400
+Processing by Users::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 4.5ms | Allocations: 735)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 6708.6ms | Allocations: 442819)
+  Rendered layouts/_messages.html.erb (Duration: 1.9ms | Allocations: 225)
+  Rendered layout layouts/application.html.erb (Duration: 6753.6ms | Allocations: 448981)
+Completed 200 OK in 6813ms (Views: 6777.0ms | ActiveRecord: 8.7ms | Allocations: 459277)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2023-06-21 17:18:48 -0400
+Processing by Users::SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"hemmings5sos@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (47.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "hemmings5sos@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:13:in `create'
+Redirected to http://127.0.0.1:3000/
+Completed 303 See Other in 398ms (ActiveRecord: 49.6ms | Allocations: 5262)
+
+
+Started GET "/" for 127.0.0.1 at 2023-06-21 17:18:49 -0400
+Processing by PagesController#home as TURBO_STREAM
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mExecutiveMetric Average (26.9ms)[0m  [1m[34mSELECT AVG("executive_metrics"."evaluation") AS "average_evaluation", "executive_metrics"."executive_id" AS "executive_metrics_executive_id" FROM "executive_metrics" WHERE "executive_metrics"."type_of_metric" = $1 GROUP BY "executive_metrics"."executive_id"[0m  [["type_of_metric", "Evaluation"]]
+  ↳ app/controllers/pages_controller.rb:11:in `home'
+  [1m[36mTicket Load (0.6ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" WHERE "tickets"."executive_id" = $1[0m  [["executive_id", 4]]
+  ↳ app/controllers/pages_controller.rb:13:in `home'
+  [1m[36mResponse Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."ticket_id" = $1 LIMIT $2[0m  [["ticket_id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:13:in `block in home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 3.1ms | Allocations: 860)
+  [1m[36mTicket Count (2.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tickets" WHERE "tickets"."executive_id" = $1[0m  [["executive_id", 4]]
+  ↳ app/views/pages/home.html.erb:141
+  [1m[36mResponse Count (5.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "responses" WHERE "responses"."executive_id" = $1 AND "responses"."acceptance" = $2 AND "responses"."rejected" = $3[0m  [["executive_id", 4], ["acceptance", false], ["rejected", false]]
+  ↳ app/views/pages/home.html.erb:185
+  [1m[36mTicket Load (0.4ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" WHERE "tickets"."executive_id" = $1 AND "tickets"."state" = $2[0m  [["executive_id", 4], ["state", "open"]]
+  ↳ app/views/pages/home.html.erb:195
+  Rendered collection of pages/_open_ticket.html.erb [1 times] (Duration: 11.2ms | Allocations: 446)
+  Rendered pages/home.html.erb within layouts/application (Duration: 39.2ms | Allocations: 4938)
+  Rendered layouts/_messages.html.erb (Duration: 0.1ms | Allocations: 31)
+  Rendered layout layouts/application.html.erb (Duration: 61.3ms | Allocations: 11716)
+Completed 200 OK in 212ms (Views: 55.6ms | ActiveRecord: 48.0ms | Allocations: 34012)
+
+
+Started GET "/users/4/tickets" for 127.0.0.1 at 2023-06-21 17:18:59 -0400
+Processing by TicketsController#index as HTML
+  Parameters: {"user_id"=>"4"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mTicket Load (1.0ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets"[0m
+  ↳ app/controllers/tickets_controller.rb:13:in `index'
+  [1m[36mTicket Load (0.7ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" WHERE "tickets"."executive_id" = $1[0m  [["executive_id", 4]]
+  ↳ app/controllers/tickets_controller.rb:13:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 0.6ms | Allocations: 372)
+  Rendered tickets/_sort_button.html.erb (Duration: 2.0ms | Allocations: 117)
+  Rendered tickets/index.html.erb within layouts/application (Duration: 22.6ms | Allocations: 8008)
+  Rendered layouts/_messages.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered layout layouts/application.html.erb (Duration: 38.0ms | Allocations: 12941)
+Completed 200 OK in 53ms (Views: 41.7ms | ActiveRecord: 2.0ms | Allocations: 16695)
+
+
+Started GET "/tickets/search?query=huy" for 127.0.0.1 at 2023-06-21 17:19:06 -0400
+Processing by TicketsController#search as */*
+  Parameters: {"query"=>"huy"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mTicket Load (3.9ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" WHERE (title LIKE '%huy%')[0m
+  ↳ app/controllers/tickets_controller.rb:30:in `+'
+  [1m[36mTicket Load (2.3ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" WHERE (description LIKE '%huy%')[0m
+  ↳ app/controllers/tickets_controller.rb:31:in `+'
+  [1m[36mTicket Load (0.6ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" INNER JOIN "users" ON "users"."id" = "tickets"."requiring_user_id" WHERE (email LIKE '%huy%')[0m
+  ↳ app/controllers/tickets_controller.rb:32:in `+'
+Completed 200 OK in 31ms (Views: 0.2ms | ActiveRecord: 7.2ms | Allocations: 4872)
+
+
+Started GET "/tickets/search?query=problemas" for 127.0.0.1 at 2023-06-21 17:19:11 -0400
+Processing by TicketsController#search as */*
+  Parameters: {"query"=>"problemas"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mTicket Load (4.1ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" WHERE (title LIKE '%problemas%')[0m
+  ↳ app/controllers/tickets_controller.rb:30:in `+'
+  [1m[36mTicket Load (4.9ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" WHERE (description LIKE '%problemas%')[0m
+  ↳ app/controllers/tickets_controller.rb:31:in `+'
+  [1m[36mTicket Load (1.3ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" INNER JOIN "users" ON "users"."id" = "tickets"."requiring_user_id" WHERE (email LIKE '%problemas%')[0m
+  ↳ app/controllers/tickets_controller.rb:32:in `+'
+Completed 200 OK in 20ms (Views: 0.1ms | ActiveRecord: 10.6ms | Allocations: 3368)
+
+
+Started GET "/tickets/search?query=problemas" for 127.0.0.1 at 2023-06-21 17:19:15 -0400
+Processing by TicketsController#search as */*
+  Parameters: {"query"=>"problemas"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mTicket Load (0.4ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" WHERE (title LIKE '%problemas%')[0m
+  ↳ app/controllers/tickets_controller.rb:30:in `+'
+  [1m[36mTicket Load (7.4ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" WHERE (description LIKE '%problemas%')[0m
+  ↳ app/controllers/tickets_controller.rb:31:in `+'
+  [1m[36mTicket Load (1.1ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" INNER JOIN "users" ON "users"."id" = "tickets"."requiring_user_id" WHERE (email LIKE '%problemas%')[0m
+  ↳ app/controllers/tickets_controller.rb:32:in `+'
+Completed 200 OK in 18ms (Views: 0.2ms | ActiveRecord: 9.1ms | Allocations: 3366)
+
+
+Started GET "/tickets/search?query=caf%C3%A9" for 127.0.0.1 at 2023-06-21 17:19:20 -0400
+Processing by TicketsController#search as */*
+  Parameters: {"query"=>"café"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mTicket Load (2.7ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" WHERE (title LIKE '%café%')[0m
+  ↳ app/controllers/tickets_controller.rb:30:in `+'
+  [1m[36mTicket Load (44.5ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" WHERE (description LIKE '%café%')[0m
+  ↳ app/controllers/tickets_controller.rb:31:in `+'
+  [1m[36mTicket Load (2.6ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" INNER JOIN "users" ON "users"."id" = "tickets"."requiring_user_id" WHERE (email LIKE '%café%')[0m
+  ↳ app/controllers/tickets_controller.rb:32:in `+'
+Completed 200 OK in 72ms (Views: 3.0ms | ActiveRecord: 50.0ms | Allocations: 3869)
+
+
+Started GET "/tickets/search?query=correctamente" for 127.0.0.1 at 2023-06-21 17:19:30 -0400
+Processing by TicketsController#search as */*
+  Parameters: {"query"=>"correctamente"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mTicket Load (3.7ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" WHERE (title LIKE '%correctamente%')[0m
+  ↳ app/controllers/tickets_controller.rb:30:in `+'
+  [1m[36mTicket Load (1.9ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" WHERE (description LIKE '%correctamente%')[0m
+  ↳ app/controllers/tickets_controller.rb:31:in `+'
+  [1m[36mTicket Load (1.2ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" INNER JOIN "users" ON "users"."id" = "tickets"."requiring_user_id" WHERE (email LIKE '%correctamente%')[0m
+  ↳ app/controllers/tickets_controller.rb:32:in `+'
+Completed 200 OK in 19ms (Views: 0.7ms | ActiveRecord: 7.7ms | Allocations: 3743)
+
+
+Started GET "/tickets/search?query=" for 127.0.0.1 at 2023-06-21 17:19:42 -0400
+Processing by TicketsController#search as */*
+  Parameters: {"query"=>""}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mTicket Load (1.5ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" WHERE (title LIKE '%%')[0m
+  ↳ app/controllers/tickets_controller.rb:30:in `+'
+  [1m[36mTicket Load (1.6ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" WHERE (description LIKE '%%')[0m
+  ↳ app/controllers/tickets_controller.rb:31:in `+'
+  [1m[36mTicket Load (1.6ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" INNER JOIN "users" ON "users"."id" = "tickets"."requiring_user_id" WHERE (email LIKE '%%')[0m
+  ↳ app/controllers/tickets_controller.rb:32:in `+'
+Completed 200 OK in 28ms (Views: 9.2ms | ActiveRecord: 5.0ms | Allocations: 9451)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2023-06-21 17:19:57 -0400
+Processing by Users::SessionsController#destroy as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 303 See Other in 43ms (ActiveRecord: 0.9ms | Allocations: 8951)
+
+
+Started GET "/" for 127.0.0.1 at 2023-06-21 17:19:57 -0400
+Processing by PagesController#home as TURBO_STREAM
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms | Allocations: 270)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2023-06-21 17:19:57 -0400
+Processing by Users::SessionsController#new as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.5ms | Allocations: 132)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 17.0ms | Allocations: 6710)
+  Rendered layouts/_messages.html.erb (Duration: 0.1ms | Allocations: 26)
+  Rendered layout layouts/application.html.erb (Duration: 26.4ms | Allocations: 11689)
+Completed 200 OK in 29ms (Views: 28.6ms | ActiveRecord: 0.0ms | Allocations: 12356)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2023-06-21 17:20:02 -0400
+Processing by Users::SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"hsTPWK@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "hstpwk@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:13:in `create'
+Redirected to http://127.0.0.1:3000/
+Completed 303 See Other in 295ms (ActiveRecord: 0.3ms | Allocations: 1970)
+
+
+Started GET "/" for 127.0.0.1 at 2023-06-21 17:20:02 -0400
+Processing by PagesController#home as TURBO_STREAM
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTicket Load (1.8ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets"[0m
+  ↳ app/controllers/pages_controller.rb:18:in `home'
+  [1m[36mResponse Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."ticket_id" = $1 LIMIT $2[0m  [["ticket_id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:18:in `block in home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 0.6ms | Allocations: 319)
+  [1m[36mTicket Count (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tickets" WHERE "tickets"."state" = $1[0m  [["state", "open"]]
+  ↳ app/views/pages/home.html.erb:233
+  [1m[36mTicket Load (1.4ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" WHERE ((resolution_date IS NULL AND deadline_date < '2023-06-21') OR (resolution_date IS NOT NULL AND deadline_date < resolution_date))[0m
+  ↳ app/views/pages/home.html.erb:249
+  Rendered pages/home.html.erb within layouts/application (Duration: 9.0ms | Allocations: 2014)
+  Rendered layouts/_messages.html.erb (Duration: 0.1ms | Allocations: 26)
+  Rendered layout layouts/application.html.erb (Duration: 19.8ms | Allocations: 8638)
+Completed 200 OK in 33ms (Views: 17.8ms | ActiveRecord: 5.4ms | Allocations: 11842)
+
+
+Started GET "/users/admin_board" for 127.0.0.1 at 2023-06-21 17:20:12 -0400
+Processing by UsersController#admin_board as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/admin_board.html.erb within layouts/application
+  Rendered users/_modal.html.erb (Duration: 1.8ms | Allocations: 125)
+  Rendered layouts/_sidebar.html.erb (Duration: 0.9ms | Allocations: 374)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 2]]
+  ↳ app/views/users/admin_board.html.erb:66
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+  ↳ app/views/users/admin_board.html.erb:116
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 0]]
+  ↳ app/views/users/admin_board.html.erb:165
+  Rendered users/admin_board.html.erb within layouts/application (Duration: 30.2ms | Allocations: 9714)
+  Rendered layouts/_messages.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered layout layouts/application.html.erb (Duration: 37.9ms | Allocations: 14726)
+Completed 200 OK in 48ms (Views: 37.7ms | ActiveRecord: 3.0ms | Allocations: 16949)
+
+
+Started GET "/users/admin_board" for 127.0.0.1 at 2023-06-21 17:33:50 -0400
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#admin_board as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/admin_board.html.erb within layouts/application
+Started GET "/tickets" for 127.0.0.1 at 2023-06-21 17:33:53 -0400
+Processing by TicketsController#index as HTML
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 8.0ms | Allocations: 2037)
+  Rendered tickets/_sort_button.html.erb (Duration: 6.8ms | Allocations: 773)
+  Rendered users/_modal.html.erb (Duration: 7.8ms | Allocations: 295)
+  Rendered layouts/_sidebar.html.erb (Duration: 1.0ms | Allocations: 374)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 2]]
+  ↳ app/views/users/admin_board.html.erb:66
+  [1m[36mTicket Load (18.1ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets"[0m
+  ↳ app/views/tickets/index.html.erb:149
+  [1m[36mUser Load (4.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+  ↳ app/views/users/admin_board.html.erb:116
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 0]]
+  ↳ app/views/users/admin_board.html.erb:165
+  Rendered users/admin_board.html.erb within layouts/application (Duration: 20302.3ms | Allocations: 2169538)
+  Rendered layouts/_messages.html.erb (Duration: 10.0ms | Allocations: 832)
+  Rendered layout layouts/application.html.erb (Duration: 20368.8ms | Allocations: 2183643)
+Completed 200 OK in 20437ms (Views: 20370.7ms | ActiveRecord: 19.3ms | Allocations: 2198595)
+
+
+  [1m[36mResponse Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."ticket_id" = $1 LIMIT $2[0m  [["ticket_id", 14], ["LIMIT", 1]]
+  ↳ app/views/tickets/index.html.erb:176
+  Rendered tickets/index.html.erb within layouts/application (Duration: 16907.1ms | Allocations: 1661948)
+  Rendered layouts/_messages.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered layout layouts/application.html.erb (Duration: 16919.8ms | Allocations: 1666903)
+Completed 200 OK in 17027ms (Views: 16837.5ms | ActiveRecord: 120.8ms | Allocations: 1680101)
+
+
+Started GET "/tickets" for 127.0.0.1 at 2023-06-21 17:34:14 -0400
+Processing by TicketsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 0.8ms | Allocations: 310)
+  Rendered tickets/_sort_button.html.erb (Duration: 0.0ms | Allocations: 8)
+  [1m[36mTicket Load (12.8ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets"[0m
+  ↳ app/views/tickets/index.html.erb:149
+  [1m[36mResponse Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."ticket_id" = $1 LIMIT $2[0m  [["ticket_id", 14], ["LIMIT", 1]]
+  ↳ app/views/tickets/index.html.erb:176
+  Rendered tickets/index.html.erb within layouts/application (Duration: 30.2ms | Allocations: 8434)
+  Rendered layouts/_messages.html.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 39.1ms | Allocations: 13342)
+Completed 200 OK in 45ms (Views: 25.5ms | ActiveRecord: 14.6ms | Allocations: 15033)
+
+
+Started GET "/tickets" for 127.0.0.1 at 2023-06-21 17:36:49 -0400
+Processing by TicketsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 0.9ms | Allocations: 310)
+  Rendered tickets/_sort_button.html.erb (Duration: 0.3ms | Allocations: 8)
+  [1m[36mTicket Load (6.5ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets"[0m
+  ↳ app/views/tickets/index.html.erb:149
+  [1m[36mResponse Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."ticket_id" = $1 LIMIT $2[0m  [["ticket_id", 14], ["LIMIT", 1]]
+  ↳ app/views/tickets/index.html.erb:176
+  Rendered tickets/index.html.erb within layouts/application (Duration: 49.6ms | Allocations: 9786)
+  Rendered layouts/_messages.html.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 61.9ms | Allocations: 14693)
+Completed 200 OK in 67ms (Views: 54.2ms | ActiveRecord: 8.5ms | Allocations: 16340)
+
+
+Started GET "/tickets" for 127.0.0.1 at 2023-06-21 17:40:24 -0400
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by TicketsController#index as HTML
+  [1m[36mUser Load (3.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 3.1ms | Allocations: 981)
+  Rendered tickets/_sort_button.html.erb (Duration: 1.8ms | Allocations: 117)
+  [1m[36mTicket Load (7.2ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets"[0m
+  ↳ app/views/tickets/index.html.erb:149
+  [1m[36mResponse Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."ticket_id" = $1 LIMIT $2[0m  [["ticket_id", 14], ["LIMIT", 1]]
+  ↳ app/views/tickets/index.html.erb:176
+  Rendered tickets/index.html.erb within layouts/application (Duration: 19559.2ms | Allocations: 1299036)
+  Rendered layouts/_messages.html.erb (Duration: 2.5ms | Allocations: 239)
+  Rendered layout layouts/application.html.erb (Duration: 19600.6ms | Allocations: 1305163)
+Completed 200 OK in 19711ms (Views: 19570.2ms | ActiveRecord: 52.0ms | Allocations: 1324298)
+
+
+Started GET "/tickets" for 127.0.0.1 at 2023-06-21 17:40:47 -0400
+Processing by TicketsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 0.7ms | Allocations: 310)
+  Rendered tickets/_sort_button.html.erb (Duration: 0.0ms | Allocations: 8)
+  [1m[36mTicket Load (2.5ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets"[0m
+  ↳ app/views/tickets/index.html.erb:149
+  [1m[36mResponse Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."ticket_id" = $1 LIMIT $2[0m  [["ticket_id", 14], ["LIMIT", 1]]
+  ↳ app/views/tickets/index.html.erb:176
+  Rendered tickets/index.html.erb within layouts/application (Duration: 30.6ms | Allocations: 8951)
+  Rendered layouts/_messages.html.erb (Duration: 0.2ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 42.1ms | Allocations: 13859)
+Completed 200 OK in 49ms (Views: 39.8ms | ActiveRecord: 3.7ms | Allocations: 15523)
+
+
+Started GET "/tickets" for 127.0.0.1 at 2023-06-21 17:41:30 -0400
+Processing by TicketsController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 0.9ms | Allocations: 310)
+  Rendered tickets/_sort_button.html.erb (Duration: 0.1ms | Allocations: 8)
+  [1m[36mTicket Load (1.8ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets"[0m
+  ↳ app/views/tickets/index.html.erb:149
+  [1m[36mResponse Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."ticket_id" = $1 LIMIT $2[0m  [["ticket_id", 14], ["LIMIT", 1]]
+  ↳ app/views/tickets/index.html.erb:176
+  Rendered tickets/index.html.erb within layouts/application (Duration: 36.7ms | Allocations: 9791)
+  Rendered layouts/_messages.html.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 46.6ms | Allocations: 14699)
+Completed 200 OK in 56ms (Views: 45.0ms | ActiveRecord: 3.0ms | Allocations: 16386)
+
+
+Started GET "/tickets" for 127.0.0.1 at 2023-06-21 17:43:00 -0400
+Processing by TicketsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 0.6ms | Allocations: 310)
+  Rendered tickets/_sort_button.html.erb (Duration: 0.0ms | Allocations: 8)
+  [1m[36mTicket Load (1.6ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets"[0m
+  ↳ app/views/tickets/index.html.erb:149
+  [1m[36mResponse Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."ticket_id" = $1 LIMIT $2[0m  [["ticket_id", 14], ["LIMIT", 1]]
+  ↳ app/views/tickets/index.html.erb:176
+  Rendered tickets/index.html.erb within layouts/application (Duration: 37.3ms | Allocations: 9792)
+  Rendered layouts/_messages.html.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 51.1ms | Allocations: 14700)
+Completed 200 OK in 56ms (Views: 49.7ms | ActiveRecord: 2.3ms | Allocations: 16357)
+
+
+Started GET "/tickets" for 127.0.0.1 at 2023-06-21 17:47:35 -0400
+Processing by TicketsController#index as HTML
+  [1m[36mUser Load (112.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 4.2ms | Allocations: 786)
+  Rendered tickets/_sort_button.html.erb (Duration: 3.0ms | Allocations: 115)
+  [1m[36mTicket Load (12.1ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets"[0m
+  ↳ app/views/tickets/index.html.erb:149
+  [1m[36mResponse Exists? (2.9ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."ticket_id" = $1 LIMIT $2[0m  [["ticket_id", 14], ["LIMIT", 1]]
+  ↳ app/views/tickets/index.html.erb:178
+  Rendered tickets/index.html.erb within layouts/application (Duration: 66.1ms | Allocations: 11563)
+  Rendered layouts/_messages.html.erb (Duration: 1.5ms | Allocations: 215)
+  Rendered layout layouts/application.html.erb (Duration: 87.0ms | Allocations: 17150)
+Completed 200 OK in 217ms (Views: 77.3ms | ActiveRecord: 127.4ms | Allocations: 19373)
+
+
+Started GET "/tickets" for 127.0.0.1 at 2023-06-21 17:48:17 -0400
+Processing by TicketsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 3.1ms | Allocations: 786)
+  Rendered tickets/_sort_button.html.erb (Duration: 1.8ms | Allocations: 115)
+  [1m[36mTicket Load (0.9ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets"[0m
+  ↳ app/views/tickets/index.html.erb:149
+  [1m[36mResponse Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."ticket_id" = $1 LIMIT $2[0m  [["ticket_id", 14], ["LIMIT", 1]]
+  ↳ app/views/tickets/index.html.erb:180
+  Rendered tickets/index.html.erb within layouts/application (Duration: 31.3ms | Allocations: 10201)
+  Rendered layouts/_messages.html.erb (Duration: 1.7ms | Allocations: 215)
+  Rendered layout layouts/application.html.erb (Duration: 45.7ms | Allocations: 15788)
+Completed 200 OK in 57ms (Views: 47.4ms | ActiveRecord: 2.0ms | Allocations: 18007)
+
+
+Started GET "/tickets" for 127.0.0.1 at 2023-06-21 17:48:48 -0400
+Processing by TicketsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 1.5ms | Allocations: 786)
+  Rendered tickets/_sort_button.html.erb (Duration: 0.7ms | Allocations: 115)
+  [1m[36mTicket Load (1.0ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets"[0m
+  ↳ app/views/tickets/index.html.erb:149
+  [1m[36mResponse Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."ticket_id" = $1 LIMIT $2[0m  [["ticket_id", 14], ["LIMIT", 1]]
+  ↳ app/views/tickets/index.html.erb:178
+  Rendered tickets/index.html.erb within layouts/application (Duration: 33.2ms | Allocations: 11561)
+  Rendered layouts/_messages.html.erb (Duration: 0.9ms | Allocations: 215)
+  Rendered layout layouts/application.html.erb (Duration: 46.1ms | Allocations: 17147)
+Completed 200 OK in 56ms (Views: 49.3ms | ActiveRecord: 1.6ms | Allocations: 19344)
+
+
+Started GET "/tickets" for 127.0.0.1 at 2023-06-21 17:49:43 -0400
+Processing by TicketsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 1.4ms | Allocations: 789)
+  Rendered tickets/_sort_button.html.erb (Duration: 0.9ms | Allocations: 115)
+  [1m[36mTicket Load (1.4ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets"[0m
+  ↳ app/views/tickets/index.html.erb:149
+  [1m[36mResponse Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."ticket_id" = $1 LIMIT $2[0m  [["ticket_id", 14], ["LIMIT", 1]]
+  ↳ app/views/tickets/index.html.erb:176
+  Rendered tickets/index.html.erb within layouts/application (Duration: 31.9ms | Allocations: 10208)
+  Rendered layouts/_messages.html.erb (Duration: 0.6ms | Allocations: 216)
+  Rendered layout layouts/application.html.erb (Duration: 43.5ms | Allocations: 15819)
+Completed 200 OK in 52ms (Views: 43.9ms | ActiveRecord: 2.0ms | Allocations: 18050)
+
+
+Started GET "/tickets" for 127.0.0.1 at 2023-06-21 17:51:17 -0400
+Processing by TicketsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 0.6ms | Allocations: 310)
+  Rendered tickets/_sort_button.html.erb (Duration: 0.1ms | Allocations: 8)
+  [1m[36mTicket Load (2.1ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets"[0m
+  ↳ app/views/tickets/index.html.erb:149
+  [1m[36mResponse Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."ticket_id" = $1 LIMIT $2[0m  [["ticket_id", 14], ["LIMIT", 1]]
+  ↳ app/views/tickets/index.html.erb:176
+  Rendered tickets/index.html.erb within layouts/application (Duration: 32.2ms | Allocations: 9785)
+  Rendered layouts/_messages.html.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 42.7ms | Allocations: 14703)
+Completed 200 OK in 49ms (Views: 41.7ms | ActiveRecord: 2.9ms | Allocations: 16378)
+
+
+Started GET "/tickets" for 127.0.0.1 at 2023-06-21 17:51:52 -0400
+Processing by TicketsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 0.7ms | Allocations: 310)
+  Rendered tickets/_sort_button.html.erb (Duration: 0.1ms | Allocations: 8)
+  [1m[36mTicket Load (1.5ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets"[0m
+  ↳ app/views/tickets/index.html.erb:149
+  [1m[36mResponse Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."ticket_id" = $1 LIMIT $2[0m  [["ticket_id", 14], ["LIMIT", 1]]
+  ↳ app/views/tickets/index.html.erb:176
+  Rendered tickets/index.html.erb within layouts/application (Duration: 39.1ms | Allocations: 9785)
+  Rendered layouts/_messages.html.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 53.6ms | Allocations: 14692)
+Completed 200 OK in 60ms (Views: 52.3ms | ActiveRecord: 2.1ms | Allocations: 16351)
+
+
+Started GET "/tickets" for 127.0.0.1 at 2023-06-21 17:52:21 -0400
+Processing by TicketsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered layouts/_sidebar.html.erb (Duration: 2.8ms | Allocations: 789)
+  Rendered tickets/_sort_button.html.erb (Duration: 2.8ms | Allocations: 115)
+  [1m[36mTicket Load (1.3ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets"[0m
+  ↳ app/views/tickets/index.html.erb:149
+  [1m[36mResponse Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."ticket_id" = $1 LIMIT $2[0m  [["ticket_id", 14], ["LIMIT", 1]]
+  ↳ app/views/tickets/index.html.erb:176
+  Rendered tickets/index.html.erb within layouts/application (Duration: 36.2ms | Allocations: 10183)
+  Rendered layouts/_messages.html.erb (Duration: 1.7ms | Allocations: 215)
+  Rendered layout layouts/application.html.erb (Duration: 50.0ms | Allocations: 15769)
+Completed 200 OK in 62ms (Views: 54.9ms | ActiveRecord: 1.9ms | Allocations: 17974)
+
+
