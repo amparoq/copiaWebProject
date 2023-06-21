@@ -175,34 +175,6 @@
 
 </head>
 
-<script>
-  function sortByCreationDateAsc() {
-    var ticketCardsContainer = document.querySelector('.ticket-cards');
-    var tickets = Array.from(ticketCardsContainer.children);
-    tickets.sort(function(a, b) {
-      var aCreationDate = new Date(a.dataset.creationDate);
-      var bCreationDate = new Date(b.dataset.creationDate);
-      return aCreationDate - bCreationDate;
-    });
-    tickets.forEach(function(ticket) {
-      ticketCardsContainer.appendChild(ticket);
-    });
-  }
-
-  function sortByCreationDateDesc() {
-    var ticketCardsContainer = document.querySelector('.ticket-cards');
-    var tickets = Array.from(ticketCardsContainer.children);
-    tickets.sort(function(a, b) {
-      var aCreationDate = new Date(a.dataset.creationDate);
-      var bCreationDate = new Date(b.dataset.creationDate);
-      return bCreationDate - aCreationDate;
-    });
-    tickets.forEach(function(ticket) {
-      ticketCardsContainer.appendChild(ticket);
-    });
-  }
-</script>
-
 <body id="page-top">
 
   <div id="wrapper">
@@ -330,7 +302,6 @@
     <% if current_user.id == @user.id %>
       <div class="profile-actions">
         <%= link_to 'Edit Profile', edit_user_path(@user), class: 'btn btn-primary' %>
-        <%= button_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
       </div>
     <% end %>
     <div class="profile-actions">

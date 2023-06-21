@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'users/admin_board', to: 'users#admin_board'
 
 
-  resources :users, only: [:index, :show, :create, :destroy, :update, :new, :edit] do
+  resources :users, only: [:index, :show, :create, :update, :new, :edit] do
     resources :tickets, only: [:index, :show, :create, :destroy, :update, :new, :edit]
   end
   resources :tickets do
