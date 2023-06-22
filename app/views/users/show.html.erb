@@ -175,6 +175,34 @@
 
 </head>
 
+<script>
+  function sortByCreationDateAsc() {
+    var ticketCardsContainer = document.querySelector('.ticket-cards');
+    var tickets = Array.from(ticketCardsContainer.children);
+    tickets.sort(function(a, b) {
+      var aCreationDate = new Date(a.dataset.creationDate);
+      var bCreationDate = new Date(b.dataset.creationDate);
+      return aCreationDate - bCreationDate;
+    });
+    tickets.forEach(function(ticket) {
+      ticketCardsContainer.appendChild(ticket);
+    });
+  }
+
+  function sortByCreationDateDesc() {
+    var ticketCardsContainer = document.querySelector('.ticket-cards');
+    var tickets = Array.from(ticketCardsContainer.children);
+    tickets.sort(function(a, b) {
+      var aCreationDate = new Date(a.dataset.creationDate);
+      var bCreationDate = new Date(b.dataset.creationDate);
+      return bCreationDate - aCreationDate;
+    });
+    tickets.forEach(function(ticket) {
+      ticketCardsContainer.appendChild(ticket);
+    });
+  }
+</script>
+
 <body id="page-top">
 
   <div id="wrapper">
