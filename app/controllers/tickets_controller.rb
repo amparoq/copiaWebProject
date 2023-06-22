@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-  before_action :set_ticket, only: %i[ show edit update destroy ]
+  before_action :set_ticket, only: %i[ show edit update destroy reopen ]
 
   # GET /tickets or /tickets.json
   def index
@@ -151,6 +151,21 @@ class TicketsController < ApplicationController
     end
   end
 
+  def reopen 
+    @ticket.state = "reopened"
+    respond_to do |format|
+      if @ticket.save
+        format.html { redirect_to ticket_url(@ticket), notice: "Ticket was successfully updated." }
+        format.json { render :show, status: :ok, location: @ticket }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @ticket.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  
+
   # DELETE /tickets/1 or /tickets/1.json
   def destroy
     @ticket.destroy
@@ -179,8 +194,6 @@ class TicketsController < ApplicationController
     redirect_to tickets_report_path(start_date: params[:start_date], end_date: params[:end_date])
   end
   
-  
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ticket
